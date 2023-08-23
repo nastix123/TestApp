@@ -1,10 +1,13 @@
 package by.eapp.testapp.cardInformation
 
+import android.graphics.Paint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScopeInstance.align
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,15 +16,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -45,26 +49,27 @@ fun CardInformation() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .background(Color.White)
+            .background(Color.Black)
             .fillMaxSize()
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start,
             modifier = Modifier
-                .background(Color.White)
-                .fillMaxWidth()
+                .background(Color.Black)
+                .fillMaxWidth(0.9f)
         ) {
-            ElevatedButton(
+            Button(
                 onClick = { },
                 modifier = Modifier
-                    .size(48.dp)
+                    .width(50.dp)
+                    .height(50.dp)
                     .padding(8.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = null,
-                    tint = Color.Black,
+                    tint = Color.White,
                     modifier = Modifier.size(24.dp)
                 )
             }
@@ -100,43 +105,66 @@ fun CardInformation() {
                 .fillMaxWidth(1f)
                 .height(26.dp)
         )
-        Card(
-            colors = CardDefaults.cardColors(Color(0xFFF3F5F9)),
-            modifier = Modifier
-                .width(180.dp)
-                .height(48.dp)
-                .clip(
-                    RoundedCornerShape(24.dp)
-                )) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Start
-                    ) {
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .size(48.dp),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Color.Red
-                            )
-                        ) {
+        bottomButton()
+
+    }
+}
+
+@Composable
+fun bottomButton() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+    horizontalArrangement = Arrangement.Center){
+    Card(
+        colors = CardDefaults.cardColors(Color(57, 57, 57, 1)),
+        modifier = Modifier
+            .width(180.dp)
+            .height(48.dp)
+            .clip(RoundedCornerShape(24.dp))
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+
+            Button(
+                onClick = {},
+                modifier = Modifier
+                    .size(32.dp)
+                    .background(Color(57, 57, 57, 1), shape = CircleShape),
+                contentPadding = PaddingValues(0.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Transparent
+                )
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(
+                            shape = CircleShape, color = Color.Red),
+                            contentAlignment = Alignment.Center
+                         )
+
+                    {
                             Icon(
-                                imageVector = Icons.Default.ArrowDropDown,
+                                imageVector = Icons.Default.Clear,
                                 contentDescription = null,
-                                tint = Color.Black
+                                tint = Color.Black,
+                                modifier = Modifier.size(16.dp)
                             )
                         }
-                        Spacer(modifier = Modifier.width(60.dp))
-                        Text(
-                            text = "Download", style = TextStyle(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight(600),
-                                color = Color(0xFF1E1E1E),
-                                textAlign = TextAlign.Center,
-                            )
-                        )
-                    }
-                }
+            }
+            Text(
+                text = "Download",
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight(600),
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                ),
+                modifier = Modifier.weight(1f)
+            )
+        }}
     }
 
 }

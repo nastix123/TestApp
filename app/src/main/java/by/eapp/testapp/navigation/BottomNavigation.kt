@@ -21,6 +21,7 @@ import by.eapp.testapp.R
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.NavHost
 import androidx.compose.material3.Scaffold
+import by.eapp.testapp.Bookmarks.BookmarkScreen
 import by.eapp.testapp.uicomponents.homescreen.HomeScreen
 
 
@@ -72,7 +73,9 @@ fun BottomNavigation(
         }
     ) { innerPadding ->
         NavHost(navController, startDestination = BottomNavigationItem.Home.route, Modifier.padding(innerPadding)) {
-            composable(BottomNavigationItem.Bookmarks.route) { }
+            composable(BottomNavigationItem.Bookmarks.route) {
+                BookmarkScreen()
+            }
             composable(BottomNavigationItem.Home.route) {
                 HomeScreen()
              }

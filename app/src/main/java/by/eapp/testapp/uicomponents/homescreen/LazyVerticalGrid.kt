@@ -27,7 +27,7 @@ fun LazyGrid() {
 
 val items = (1..100).map {
     GridItem(
-        height = Random.nextInt(100, 300).dp,
+        height = Random.nextInt(150, 300).dp,
         color = Color(
             Random.nextLong(0xFFFFFFFF)
         ).copy(alpha = 1f)

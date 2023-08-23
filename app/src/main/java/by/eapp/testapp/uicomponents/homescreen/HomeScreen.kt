@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ElevatedSuggestionChip
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+
 @Composable
 fun MainChip(
     modifier: Modifier = Modifier
@@ -33,7 +35,7 @@ fun MainChip(
                 .height(38.dp)
                 .background(color = Color(0xFFF3F5F9), shape = RoundedCornerShape(size = 100.dp))
                 .padding(start = 20.dp, top = 10.dp, end = 20.dp, bottom = 10.dp)
-                .clickable {  }
+                .clickable { }
                 .then(Modifier.wrapContentWidth()),
             onClick = {},
             label = {
@@ -69,15 +71,20 @@ fun ChipRow() {
 
 @Composable
 fun HomeScreen(){
+
     Column (
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
 
     ) {
         Searchbar()
-        Spacer(modifier = Modifier.height(16.dp).fillMaxWidth())
+        Spacer(modifier = Modifier
+            .height(16.dp)
+            .fillMaxWidth())
         ChipRow()
-        Spacer(modifier = Modifier.height(16.dp).fillMaxWidth())
+        Spacer(modifier = Modifier
+            .height(16.dp)
+            .fillMaxWidth())
         LazyGrid()
 
     }
