@@ -6,16 +6,26 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 
+import by.eapp.testapp.presentation.ui.SplashScreen
+import by.eapp.testapp.presentation.ui.homescreen.HomeScreen
+
 
 @Composable
-fun Navigation(navController: NavHostController) {
-    NavHost(navController, startDestination = BottomNavigationItem.Home.route) {
+fun Navigation(navController: NavHostController,
+) {
+    NavHost(navController, startDestination = BottomNavigationItem.Splash.route) {
+        composable(BottomNavigationItem.Splash.route) {
+            Log.d("Navigation", "Navigating to Splash")
+            SplashScreen(navController = navController)
+        }
         composable(BottomNavigationItem.Home.route) {
             Log.d("Navigation", "Navigating to HomeScreen")
+            HomeScreen()
 
         }
         composable(BottomNavigationItem.Bookmarks.route) {
             Log.d("Navigation", "Navigating to TrainingListScreen")
+            //BookmarkScreen()
         }
     }
 }

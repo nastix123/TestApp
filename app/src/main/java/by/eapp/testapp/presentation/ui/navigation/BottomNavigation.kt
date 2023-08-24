@@ -23,7 +23,8 @@ import androidx.navigation.compose.NavHost
 import androidx.compose.material3.Scaffold
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import by.eapp.testapp.presentation.ui.Bookmarks.BookmarkScreen
+
+import by.eapp.testapp.presentation.ui.SplashScreen
 import by.eapp.testapp.presentation.ui.homescreen.HomeScreen
 import by.eapp.testapp.presentation.ui.homescreen.PreviewCard
 
@@ -50,6 +51,7 @@ fun BottomNavigation(
         BottomNavigationItem.Bookmarks
     )
     val navController = rememberNavController()
+
     Scaffold(
 
         bottomBar = {
@@ -76,9 +78,12 @@ fun BottomNavigation(
             }
         }
     ) { innerPadding ->
-        NavHost(navController, startDestination = BottomNavigationItem.Home.route, Modifier.padding(innerPadding)) {
+        NavHost(navController, startDestination = BottomNavigationItem.Splash.route, Modifier.padding(innerPadding)) {
+            composable(BottomNavigationItem.Splash.route) {
+                SplashScreen(navController = navController)
+            }
             composable(BottomNavigationItem.Bookmarks.route) {
-                BookmarkScreen()
+                HomeScreen()
             }
             composable(BottomNavigationItem.Home.route) {
                 HomeScreen()

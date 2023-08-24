@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
@@ -19,10 +20,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import by.eapp.testapp.presentation.ui.homescreen.RandomColorBox
-
+/*
 @Composable
-fun BookmarkScreen() {
+fun BookmarkScreen(navController:NavController) {
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -44,9 +46,15 @@ fun BookmarkScreen() {
     )
     {
         items(by.eapp.testapp.presentation.ui.homescreen.items) { item ->
-            RandomColorBox(item = item)
+            RandomColorBox(item = item, navController = navController,photo = Imag)
         }
     }
 
 }
 }
+
+
+fun <T: Any> LazyGridScope.items(
+
+)
+*/

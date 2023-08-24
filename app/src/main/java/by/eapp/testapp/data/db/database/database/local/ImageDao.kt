@@ -11,8 +11,9 @@ interface ImageDao {
   suspend fun saveAll(images:List<Photo>)
 
   @Query("SELECT * FROM images_table")
-  suspend fun getAll():
-          @Query("DELETE *FROM images_table")
+  suspend fun getAll()
+
+          @Query("DELETE * FROM images_table")
           suspend fun deleteAll()
 
 }

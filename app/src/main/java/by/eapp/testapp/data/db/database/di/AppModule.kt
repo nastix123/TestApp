@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
-
+/*
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
@@ -72,4 +72,4 @@ object AppModule {
             pagingSourceFactory = { database.imagesDao().getAllImages() }
         )
     }
-}
+}*/

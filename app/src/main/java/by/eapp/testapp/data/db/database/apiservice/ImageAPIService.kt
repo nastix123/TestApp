@@ -1,6 +1,6 @@
 package by.eapp.testapp.data.db.database.apiservice
 
-import androidx.room.Query
+import retrofit2.http.Query
 import by.eapp.testapp.data.db.database.imageDetail.ImageDetailResponse
 import by.eapp.testapp.data.db.database.searching.Response
 import retrofit2.http.GET
@@ -23,5 +23,6 @@ interface ImageAPIService {
         @Query("query") photoQuery: String,
         @Query("per_page") perPage: Int = 30
     ): Response
+
 
 }

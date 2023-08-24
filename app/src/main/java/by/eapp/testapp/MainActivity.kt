@@ -7,6 +7,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import by.eapp.testapp.presentation.ui.SplashScreen
 import by.eapp.testapp.presentation.ui.navigation.BottomNavigationScreen
 import by.eapp.testapp.ui.theme.TestAppTheme
 
@@ -20,6 +23,8 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     color = Color.White
                 ) {
+
+
                     BottomNavigationScreen()
                 }
 
