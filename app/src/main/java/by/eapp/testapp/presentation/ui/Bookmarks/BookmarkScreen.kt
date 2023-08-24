@@ -1,4 +1,4 @@
-package by.eapp.testapp.Bookmarks
+package by.eapp.testapp.presentation.ui.Bookmarks
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,7 +19,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import by.eapp.testapp.uicomponents.homescreen.RandomColorBox
+import by.eapp.testapp.presentation.ui.homescreen.RandomColorBox
 
 @Composable
 fun BookmarkScreen() {
@@ -43,7 +43,7 @@ fun BookmarkScreen() {
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     )
     {
-        items(by.eapp.testapp.uicomponents.homescreen.items) { item ->
+        items(by.eapp.testapp.presentation.ui.homescreen.items) { item ->
             RandomColorBox(item = item)
         }
     }

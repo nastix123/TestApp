@@ -1,0 +1,13 @@
+package by.eapp.testapp.data.db.database
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+
+@Entity(tableName = "photos_remote_keys_table")
+data class ImagesRemoteKey(
+    @PrimaryKey(autoGenerate = false)
+    val id: Int,
+    val prevPage: Int?,
+    val nextPage: Int?
+)

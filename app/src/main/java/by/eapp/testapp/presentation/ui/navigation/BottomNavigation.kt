@@ -1,6 +1,6 @@
 
 
-package by.eapp.testapp.navigation
+package by.eapp.testapp.presentation.ui.navigation
 
 
 import androidx.compose.foundation.layout.Box
@@ -21,15 +21,18 @@ import by.eapp.testapp.R
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.NavHost
 import androidx.compose.material3.Scaffold
-import by.eapp.testapp.Bookmarks.BookmarkScreen
-import by.eapp.testapp.uicomponents.homescreen.HomeScreen
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+import by.eapp.testapp.presentation.ui.Bookmarks.BookmarkScreen
+import by.eapp.testapp.presentation.ui.homescreen.HomeScreen
+import by.eapp.testapp.presentation.ui.homescreen.PreviewCard
 
 
 @Composable
 fun BottomNavigationScreen() {
     val navController = rememberNavController()
     Scaffold (
-        bottomBar = { BottomNavigation(navController = navController)},
+        bottomBar = { BottomNavigation(navController = navController) },
         content = { padding ->
             Box(modifier = Modifier.padding(padding)) {
                 Navigation(navController = navController)
@@ -43,8 +46,9 @@ fun BottomNavigation(
     navController: NavController,
     modifier: Modifier = Modifier) {
     val items = listOf(
-       BottomNavigationItem.Home,
-    BottomNavigationItem.Bookmarks )
+        BottomNavigationItem.Home,
+        BottomNavigationItem.Bookmarks
+    )
     val navController = rememberNavController()
     Scaffold(
 
@@ -54,7 +58,7 @@ fun BottomNavigation(
                 val currentDestination = navBackStackEntry?.destination
                 items.forEach { item ->
                     BottomNavigationItem(
-                        icon = { Icon(imageVector = item.icon, contentDescription = null) },
+                        icon = { item.icon?.let { Icon(imageVector = it, contentDescription = null) } },
 
                         selected = currentDestination?.hierarchy?.any {
                             it.route == item.route } == true,
@@ -79,6 +83,16 @@ fun BottomNavigation(
             composable(BottomNavigationItem.Home.route) {
                 HomeScreen()
              }
+            composable(
+                BottomNavigationItem.Details.route+"/{photoId}",
+                arguments = listOf(
+                    navArgument("photoId") {
+                        type = NavType.IntType
+                        nullable = false
+                    }
+                )) {entry ->
+                PreviewCard()
+            }
         }
     }
 }

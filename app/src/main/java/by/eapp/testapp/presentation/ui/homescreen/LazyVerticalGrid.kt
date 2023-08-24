@@ -1,4 +1,4 @@
-package by.eapp.testapp.uicomponents.homescreen
+package by.eapp.testapp.presentation.ui.homescreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues

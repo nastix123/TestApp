@@ -1,4 +1,4 @@
-package by.eapp.testapp.navigation
+package by.eapp.testapp.presentation.ui.navigation
 
 import android.util.Log
 import androidx.compose.runtime.Composable

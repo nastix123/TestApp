@@ -1,5 +1,5 @@
 
-package by.eapp.testapp.uicomponents.homescreen
+package by.eapp.testapp.presentation.ui.homescreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -17,6 +17,8 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -27,12 +29,12 @@ import by.eapp.testapp.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Searchbar() {
-    val message = remember {
+    var message by remember {
         mutableStateOf("")
     }
     TextField(
-        value = message.value,
-        onValueChange = { newText -> message.value = newText },
+        value = message,
+        onValueChange = { message = it },
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
