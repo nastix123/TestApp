@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 
 import by.eapp.testapp.presentation.ui.SplashScreen
-import by.eapp.testapp.presentation.ui.homescreen.HomeScreen
+import by.eapp.testapp.presentation.ui.homescreen.home.HomeScreen
 
 
 @Composable

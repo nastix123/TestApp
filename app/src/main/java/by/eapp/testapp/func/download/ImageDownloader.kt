@@ -10,7 +10,7 @@ class ImageDownloader(
 ) : DownloadImage {
     private val downloadManager = context.getSystemService(DownloadManager::class.java)
 
-    override fun downloadImage(url: String): Long {
+    public override fun downloadImage(url: String): Long {
         val request = DownloadManager.Request(url.toUri())
             .setMimeType("image/jpeg")
             .setAllowedNetworkTypes(

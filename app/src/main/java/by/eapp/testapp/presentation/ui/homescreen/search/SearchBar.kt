@@ -1,5 +1,5 @@
 
-package by.eapp.testapp.presentation.ui.homescreen
+package by.eapp.testapp.presentation.ui.homescreen.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

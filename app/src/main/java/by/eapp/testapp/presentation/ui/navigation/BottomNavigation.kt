@@ -24,9 +24,8 @@ import androidx.compose.material3.Scaffold
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 
-import by.eapp.testapp.presentation.ui.SplashScreen
-import by.eapp.testapp.presentation.ui.homescreen.HomeScreen
-import by.eapp.testapp.presentation.ui.homescreen.PreviewCard
+import by.eapp.testapp.presentation.ui.homescreen.home.HomeScreen
+
 
 
 @Composable
@@ -78,10 +77,10 @@ fun BottomNavigation(
             }
         }
     ) { innerPadding ->
-        NavHost(navController, startDestination = BottomNavigationItem.Splash.route, Modifier.padding(innerPadding)) {
-            composable(BottomNavigationItem.Splash.route) {
+        NavHost(navController, startDestination = BottomNavigationItem.Home.route, Modifier.padding(innerPadding)) {
+           /* composable(BottomNavigationItem.Splash.route) {
                 SplashScreen(navController = navController)
-            }
+            }*/
             composable(BottomNavigationItem.Bookmarks.route) {
                 HomeScreen()
             }
@@ -95,8 +94,8 @@ fun BottomNavigation(
                         type = NavType.IntType
                         nullable = false
                     }
-                )) {entry ->
-                PreviewCard()
+                )) {
+
             }
         }
     }
