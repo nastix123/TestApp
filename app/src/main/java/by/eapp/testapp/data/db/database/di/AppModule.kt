@@ -1,5 +1,14 @@
 package by.eapp.testapp.data.db.database.di
 
+import android.content.Context
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.room.Room
+import by.eapp.testapp.data.db.database.apiservice.ImageAPIService
+import by.eapp.testapp.data.db.database.database.local.Database
+import by.eapp.testapp.data.db.database.imageList.Image
+import by.eapp.testapp.data.db.database.paging.ImagesRemoteMediator
 import by.eapp.testapp.func.Base
 import dagger.Module
 import dagger.Provides
@@ -7,21 +16,22 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
-/*
+
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-   /* @Provides
+    @Provides
     @Singleton
     fun providesLoggingInterceptor() = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
-    }*/
+    }
 
     @Provides
     @Singleton
@@ -45,16 +55,16 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun createsApiService(retrofit: Retrofit): PhotosApiService {
-        return retrofit.create(PhotosApiService::class.java)
+    fun createsApiService(retrofit: Retrofit): ImageAPIService {
+        return retrofit.create(ImageAPIService::class.java)
     }
 
     @Provides
     @Singleton
-    fun providesDatabase(@ApplicationContext context: Context): PhotosDatabase {
+    fun providesDatabase(@ApplicationContext context: Context): Database {
         return Room.databaseBuilder(
             context,
-            PhotosDatabase::class.java,
+            Database::class.java,
             "photos_db"
         ).build()
     }
@@ -62,14 +72,14 @@ object AppModule {
     @OptIn(ExperimentalPagingApi::class)
     @Provides
     @Singleton
-    fun providesPhotosPager(
-        database: PhotosDatabase,
-        apiService: PhotosApiService
-    ): Pager<Int, Photo> {
+    fun providesImagesPager(
+        database: Database,
+        apiService: ImageAPIService
+    ): Pager<Int, Image> {
         return Pager(
-            config = PagingConfig(pageSize = 20),
-            remoteMediator = PhotosRemoteMediator(apiService, database),
-            pagingSourceFactory = { database.imagesDao().getAllImages() }
+            config = PagingConfig(pageSize = 30),
+            remoteMediator = ImagesRemoteMediator( database, apiService),
+            pagingSourceFactory = { database.imageDao().getAll() }
         )
     }
-}*/
+}

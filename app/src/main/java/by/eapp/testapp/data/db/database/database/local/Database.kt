@@ -8,7 +8,7 @@ import by.eapp.testapp.data.db.database.imageList.Image
 @Database( entities = [Image::class, ImagesRemoteKey::class],
     version = 1,
     exportSchema = false)
-abstract class Database: RoomDatabase() {
+    abstract class Database: RoomDatabase() {
     abstract fun remoteKeysDao(): ImageRemoteKeyDao
     abstract fun imageDao(): ImageDao
 

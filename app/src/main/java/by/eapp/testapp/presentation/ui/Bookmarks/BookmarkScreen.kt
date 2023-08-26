@@ -45,7 +45,7 @@ fun BookmarkScreen(navController:NavController) {
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     )
     {
-        items(by.eapp.testapp.presentation.ui.homescreen.items) { item ->
+        items(by.eapp.testapp.presentation.ui.homescreen.home.items) { item ->
             RandomColorBox(item = item, navController = navController,photo = Imag)
         }
     }
