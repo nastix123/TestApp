@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import by.eapp.testapp.R
 import android.content.Context
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Search
 
 
 sealed class BottomNavigationItem(
@@ -15,6 +16,7 @@ sealed class BottomNavigationItem(
     var icon: ImageVector?,
     var title: String
 ) {
+    object Search: BottomNavigationItem("search", Icons.Default.Search,"Search")
     object Splash: BottomNavigationItem("splash", Icons.Filled.Clear,"Splash")
     object Home : BottomNavigationItem("home", Icons.Default.Home, "Home")
     object Details: BottomNavigationItem("details", null,"Details")

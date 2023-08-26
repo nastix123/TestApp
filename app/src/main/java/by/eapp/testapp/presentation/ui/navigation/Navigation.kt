@@ -20,7 +20,7 @@ fun Navigation(navController: NavHostController,
         }
         composable(BottomNavigationItem.Home.route) {
             Log.d("Navigation", "Navigating to HomeScreen")
-            HomeScreen()
+            HomeScreen(navController = navController)
 
         }
         composable(BottomNavigationItem.Bookmarks.route) {

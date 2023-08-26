@@ -23,9 +23,11 @@ import androidx.navigation.compose.NavHost
 import androidx.compose.material3.Scaffold
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import by.eapp.testapp.presentation.ui.cardInformation.CardInformation
+import by.eapp.testapp.presentation.ui.cardInformation.PhotoDetailsScreen
 
 import by.eapp.testapp.presentation.ui.homescreen.home.HomeScreen
-
+import by.eapp.testapp.presentation.ui.homescreen.search.Searchbar
 
 
 @Composable
@@ -76,16 +78,19 @@ fun BottomNavigation(
                 }
             }
         }
-    ) { innerPadding ->
-        NavHost(navController, startDestination = BottomNavigationItem.Home.route, Modifier.padding(innerPadding)) {
+    ) { it
+        NavHost(navController, startDestination = BottomNavigationItem.Home.route) {
            /* composable(BottomNavigationItem.Splash.route) {
                 SplashScreen(navController = navController)
             }*/
+            composable(BottomNavigationItem.Search.route) {
+                Searchbar(navController = navController)
+            }
             composable(BottomNavigationItem.Bookmarks.route) {
-                HomeScreen()
+                HomeScreen(navController)
             }
             composable(BottomNavigationItem.Home.route) {
-                HomeScreen()
+                HomeScreen(navController)
              }
             composable(
                 BottomNavigationItem.Details.route+"/{photoId}",
@@ -94,15 +99,11 @@ fun BottomNavigation(
                         type = NavType.IntType
                         nullable = false
                     }
-                )) {
+                )) {entry ->
+        PhotoDetailsScreen(imageId = entry.arguments?.getInt("photoId")!!)
 
             }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun testNavigation() {
-    BottomNavigationScreen()
-}

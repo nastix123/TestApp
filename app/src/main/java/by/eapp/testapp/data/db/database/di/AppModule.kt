@@ -9,6 +9,7 @@ import by.eapp.testapp.data.db.database.apiservice.ImageAPIService
 import by.eapp.testapp.data.db.database.database.local.Database
 import by.eapp.testapp.data.db.database.imageList.Image
 import by.eapp.testapp.data.db.database.paging.ImagesRemoteMediator
+import by.eapp.testapp.data.db.database.searching.Photo
 import by.eapp.testapp.func.Base
 import dagger.Module
 import dagger.Provides

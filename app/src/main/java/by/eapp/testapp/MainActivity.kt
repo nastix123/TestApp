@@ -1,5 +1,6 @@
 package by.eapp.testapp
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,7 +14,11 @@ import androidx.navigation.compose.rememberNavController
 import by.eapp.testapp.presentation.ui.SplashScreen
 import by.eapp.testapp.presentation.ui.navigation.BottomNavigationScreen
 import by.eapp.testapp.ui.theme.TestAppTheme
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +29,6 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     color = Color.White
                 ) {
-
-
                     BottomNavigationScreen()
                 }
 
@@ -57,8 +60,6 @@ fun SearchBarSample() {
 }
 */
 
-@Preview
-@Composable
-fun Search() {
-
+@HiltAndroidApp
+class TestApp: Application() {
 }

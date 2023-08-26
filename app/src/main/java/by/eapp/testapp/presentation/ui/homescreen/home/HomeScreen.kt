@@ -31,6 +31,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedSuggestionChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -46,8 +47,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import by.eapp.testapp.data.db.database.imageList.Image
 import by.eapp.testapp.presentation.ui.homescreen.search.Searchbar
+import by.eapp.testapp.presentation.ui.navigation.BottomNavigationItem
 
 
 @Composable
@@ -93,15 +96,26 @@ fun ChipRow() {
     }
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
+    val viewModel = hiltViewModel<ImagesListViewModel>()
+    val images = viewModel.curatedImages().collectAsLazyPagingItems()
 
-    Column(
+    Scaffold(
+        topBar = {
+            TopApp(onSearchClick = {
+                navController.navigate(BottomNavigationItem.Search.route)
+            })
+        },
+        content = { HomeScreenListContent(items = images, navController = navController)}
+    )
+    /*Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
 
     ) {
-        Searchbar()
+        Searchbar(navController)
         Spacer(
             modifier = Modifier
                 .height(16.dp)
@@ -115,7 +129,7 @@ fun HomeScreen() {
         )
 
 
-    }
+    }*/
 }
 
 @Composable

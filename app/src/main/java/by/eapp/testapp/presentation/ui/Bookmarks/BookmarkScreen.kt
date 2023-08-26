@@ -21,7 +21,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import by.eapp.testapp.presentation.ui.homescreen.RandomColorBox
 /*
 @Composable
 fun BookmarkScreen(navController:NavController) {

@@ -33,7 +33,7 @@ import androidx.navigation.NavController
 import by.eapp.testapp.presentation.ui.homescreen.home.CardItem
 import by.eapp.testapp.presentation.ui.homescreen.search.SearchBarViewModel
 
-
+/*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchPhotoScreen(
@@ -127,3 +127,4 @@ fun SearchPhotoScreen(
 
 
 
+*/

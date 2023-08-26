@@ -19,8 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ImagesListViewModel @Inject constructor(
     private val dbImages: Database,
-    private val apiService: ImageAPIService,
-
+    private val apiService: ImageAPIService
     ) : ViewModel() {
     @OptIn(ExperimentalPagingApi::class)
     fun curatedImages(): Flow<PagingData<Image>> = Pager(
@@ -39,7 +38,6 @@ class ImagesListViewModel @Inject constructor(
             dbImages.imageDao().getAll()
         },
     ).flow.cachedIn(viewModelScope)
-
 
 }
 
