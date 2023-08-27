@@ -1,4 +1,4 @@
-package by.eapp.testapp.data.db.database.searching
+package by.eapp.testapp.model.searching
 
 import com.google.gson.annotations.SerializedName
 

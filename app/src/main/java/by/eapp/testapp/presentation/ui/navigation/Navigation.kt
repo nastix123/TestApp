@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 
 import by.eapp.testapp.presentation.ui.SplashScreen
 import by.eapp.testapp.presentation.ui.homescreen.home.HomeScreen
-
+/*
 
 @Composable
 fun Navigation(navController: NavHostController,
@@ -28,4 +28,4 @@ fun Navigation(navController: NavHostController,
             //BookmarkScreen()
         }
     }
-}
+}*/

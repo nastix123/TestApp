@@ -49,7 +49,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import by.eapp.testapp.R
 import by.eapp.testapp.func.download.ImageDownloader
-import by.eapp.testapp.data.db.database.imageDetail.ImageDetailResponse
+import by.eapp.testapp.model.imageDetail.ImageDetailResponse
 import by.eapp.testapp.func.Resource
 import coil.ImageLoader
 import coil.compose.AsyncImage

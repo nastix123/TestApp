@@ -1,9 +1,9 @@
-package by.eapp.testapp.data.db.database.database.local
+package by.eapp.testapp.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import by.eapp.testapp.data.db.database.ImagesRemoteKey
-import by.eapp.testapp.data.db.database.imageList.Image
+import by.eapp.testapp.model.ImagesRemoteKey
+import by.eapp.testapp.model.imageList.Image
 
 @Database( entities = [Image::class, ImagesRemoteKey::class],
     version = 1,

@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalPagingApi::class)
 
-package by.eapp.testapp.data.db.database.paging
+package by.eapp.testapp.data.paging
 
 
 import androidx.paging.ExperimentalPagingApi
@@ -8,15 +8,15 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import by.eapp.testapp.data.db.database.ImagesRemoteKey
-import by.eapp.testapp.data.db.database.apiservice.ImageAPIService
-import by.eapp.testapp.data.db.database.database.local.Database
-import by.eapp.testapp.data.db.database.imageList.Image
+import by.eapp.testapp.model.ImagesRemoteKey
+import by.eapp.testapp.data.remote.ImageAPIService
+import by.eapp.testapp.data.local.Database
+import by.eapp.testapp.model.imageList.Image
 import kotlinx.coroutines.delay
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
-import androidx.room.withTransaction
+
 @OptIn(ExperimentalPagingApi::class)
 class ImagesRemoteMediator @Inject constructor(
     private val dbImages: Database,

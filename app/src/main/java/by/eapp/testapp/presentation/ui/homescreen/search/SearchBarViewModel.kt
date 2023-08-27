@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.eapp.testapp.func.Resource
-import by.eapp.testapp.presentation.ui.homescreen.ImagesRepository
+import by.eapp.testapp.repo.ImagesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

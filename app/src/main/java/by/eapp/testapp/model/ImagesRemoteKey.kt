@@ -1,4 +1,4 @@
-package by.eapp.testapp.data.db.database
+package by.eapp.testapp.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -9,5 +9,5 @@ data class ImagesRemoteKey(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val prevPage: Int?,
-    val nextPage: Int?,
+    val nextPage: Int?
 )

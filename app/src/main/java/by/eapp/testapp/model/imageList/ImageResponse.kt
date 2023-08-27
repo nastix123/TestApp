@@ -1,4 +1,4 @@
-package by.eapp.testapp.data.db.database.imageList
+package by.eapp.testapp.model.imageList
 
 import com.google.gson.annotations.SerializedName
 

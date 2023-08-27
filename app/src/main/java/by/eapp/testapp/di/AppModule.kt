@@ -1,15 +1,14 @@
-package by.eapp.testapp.data.db.database.di
+package by.eapp.testapp.di
 
 import android.content.Context
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.room.Room
-import by.eapp.testapp.data.db.database.apiservice.ImageAPIService
-import by.eapp.testapp.data.db.database.database.local.Database
-import by.eapp.testapp.data.db.database.imageList.Image
-import by.eapp.testapp.data.db.database.paging.ImagesRemoteMediator
-import by.eapp.testapp.data.db.database.searching.Photo
+import by.eapp.testapp.data.remote.ImageAPIService
+import by.eapp.testapp.data.local.Database
+import by.eapp.testapp.model.imageList.Image
+import by.eapp.testapp.data.paging.ImagesRemoteMediator
 import by.eapp.testapp.func.Base
 import dagger.Module
 import dagger.Provides
@@ -24,18 +23,17 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-    @Provides
     @Singleton
+    @Provides
     fun providesLoggingInterceptor() = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    @Provides
     @Singleton
+    @Provides
     fun providesOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
@@ -44,9 +42,8 @@ object AppModule {
             .retryOnConnectionFailure(true)
             .build()
     }
-
-    @Provides
     @Singleton
+    @Provides
     fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit
         .Builder()
         .baseUrl(Base.BaseURL)
@@ -54,14 +51,15 @@ object AppModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    @Singleton
+   @Singleton
     @Provides
     fun createsApiService(retrofit: Retrofit): ImageAPIService {
         return retrofit.create(ImageAPIService::class.java)
     }
 
+
+   @Singleton
     @Provides
-    @Singleton
     fun providesDatabase(@ApplicationContext context: Context): Database {
         return Room.databaseBuilder(
             context,
@@ -71,8 +69,8 @@ object AppModule {
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    @Provides
     @Singleton
+    @Provides
     fun providesImagesPager(
         database: Database,
         apiService: ImageAPIService

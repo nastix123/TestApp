@@ -1,9 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
-    id("com.google.dagger.hilt.android") version "2.44" apply false
     id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+    id 'com.google.devtools.ksp' version '1.7.0-1.0.6'
 }
 
 android {
@@ -47,9 +48,12 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    kapt {
+        correctErrorTypes true
+    }
     buildscript {
         dependencies.classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10")
-        ext.hilt_version = '2.38.1'
+        ext.hilt_version = '2.4.0'
         dependencies.classpath ("com.google.dagger:hilt-android-gradle-plugin:$hilt_version")
     }
 }
@@ -88,14 +92,15 @@ dependencies {
 
     //room
     implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
+   kapt "androidx.room:room-compiler:$room_version"
+   // ksp "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     //dagger hilt
 
 
-    implementation "com.google.dagger:hilt-android:2.37"
-    annotationProcessor 'com.google.dagger:hilt-android-compiler:2.37'
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+    implementation "androidx.hilt:hilt-navigation-compose:1.1.0-alpha01"
     //for api
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     //images
@@ -105,10 +110,6 @@ dependencies {
     def paging_version = "3.1.1"
     //for paging
     implementation "androidx.paging:paging-runtime:$paging_version"
-    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
+    implementation "androidx.paging:paging-compose:3.2.0"
 
-}
-
-kapt {
-    correctErrorTypes = true
 }

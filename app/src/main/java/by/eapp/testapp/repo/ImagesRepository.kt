@@ -1,8 +1,9 @@
-package by.eapp.testapp.presentation.ui.homescreen
+@file:Suppress("UNREACHABLE_CODE")
+package by.eapp.testapp.repo
 
-import by.eapp.testapp.data.db.database.apiservice.ImageAPIService
-import by.eapp.testapp.data.db.database.imageDetail.ImageDetailResponse
-import by.eapp.testapp.data.db.database.searching.Response
+import by.eapp.testapp.data.remote.ImageAPIService
+import by.eapp.testapp.model.imageDetail.ImageDetailResponse
+import by.eapp.testapp.model.searching.Response
 import by.eapp.testapp.func.Resource
 import retrofit2.HttpException
 import java.io.IOException

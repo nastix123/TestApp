@@ -7,10 +7,10 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import by.eapp.testapp.data.db.database.apiservice.ImageAPIService
-import by.eapp.testapp.data.db.database.database.local.Database
-import by.eapp.testapp.data.db.database.imageList.Image
-import by.eapp.testapp.data.db.database.paging.ImagesRemoteMediator
+import by.eapp.testapp.data.remote.ImageAPIService
+import by.eapp.testapp.data.local.Database
+import by.eapp.testapp.model.imageList.Image
+import by.eapp.testapp.data.paging.ImagesRemoteMediator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

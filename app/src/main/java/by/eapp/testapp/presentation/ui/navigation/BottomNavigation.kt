@@ -29,7 +29,7 @@ import by.eapp.testapp.presentation.ui.cardInformation.PhotoDetailsScreen
 import by.eapp.testapp.presentation.ui.homescreen.home.HomeScreen
 import by.eapp.testapp.presentation.ui.homescreen.search.Searchbar
 
-
+/*
 @Composable
 fun BottomNavigationScreen() {
     val navController = rememberNavController()
@@ -90,7 +90,7 @@ fun BottomNavigation(
                 HomeScreen(navController)
             }
             composable(BottomNavigationItem.Home.route) {
-                HomeScreen(navController)
+               // HomeScreen(navController)
              }
             composable(
                 BottomNavigationItem.Details.route+"/{photoId}",
@@ -105,5 +105,5 @@ fun BottomNavigation(
             }
         }
     }
-}
+}*/
 

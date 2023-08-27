@@ -10,7 +10,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import by.eapp.testapp.data.db.database.imageList.Image
+import by.eapp.testapp.model.imageList.Image
 
 @Composable
 fun ImagesList(

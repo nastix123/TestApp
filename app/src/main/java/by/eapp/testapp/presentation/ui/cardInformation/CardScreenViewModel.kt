@@ -2,9 +2,9 @@ package by.eapp.testapp.presentation.ui.cardInformation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import by.eapp.testapp.data.db.database.imageDetail.ImageDetailResponse
+import by.eapp.testapp.model.imageDetail.ImageDetailResponse
 import by.eapp.testapp.func.Resource
-import by.eapp.testapp.presentation.ui.homescreen.ImagesRepository
+import by.eapp.testapp.repo.ImagesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

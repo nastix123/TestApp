@@ -48,7 +48,7 @@ import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import by.eapp.testapp.data.db.database.imageList.Image
+import by.eapp.testapp.model.imageList.Image
 import by.eapp.testapp.presentation.ui.homescreen.search.Searchbar
 import by.eapp.testapp.presentation.ui.navigation.BottomNavigationItem
 
@@ -101,7 +101,6 @@ fun ChipRow() {
 fun HomeScreen(navController: NavController) {
     val viewModel = hiltViewModel<ImagesListViewModel>()
     val images = viewModel.curatedImages().collectAsLazyPagingItems()
-
     Scaffold(
         topBar = {
             TopApp(onSearchClick = {
