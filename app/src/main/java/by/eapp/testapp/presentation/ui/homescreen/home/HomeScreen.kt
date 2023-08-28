@@ -1,8 +1,6 @@
 package by.eapp.testapp.presentation.ui.homescreen.home
 
 import android.annotation.SuppressLint
-import android.os.Parcel
-import android.os.Parcelable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,32 +15,29 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ElevatedSuggestionChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.LoadState
@@ -50,51 +45,53 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import by.eapp.testapp.model.imageList.Image
 import by.eapp.testapp.presentation.ui.homescreen.search.Searchbar
-import by.eapp.testapp.presentation.ui.navigation.BottomNavigationItem
 
-
-@Composable
-fun MainChip(
-    modifier: Modifier = Modifier
-) {
-    ElevatedSuggestionChip(
-        modifier = Modifier
-            .height(38.dp)
-            .background(color = Color(0xFFF3F5F9), shape = RoundedCornerShape(size = 100.dp))
-            .padding(start = 20.dp, top = 10.dp, end = 20.dp, bottom = 10.dp)
-            .clickable { }
-            .then(Modifier.wrapContentWidth()),
-        onClick = {},
-        label = {
-            Text(
-                text = "Watches",
-                style = TextStyle(
-                    fontSize = 7.sp,
-                    fontWeight = FontWeight(400),
-                    color = Color(0xFF1E1E1E),
-                    letterSpacing = 0.28.sp,
-                )
-            )
-        }
-    )
-}
-
-
-@Preview
-@Composable
-fun testChip() {
-    MainChip()
-}
 
 @Composable
 fun ChipRow() {
-    LazyRow {
-        items(7) {
-            MainChip()
-            Spacer(modifier = Modifier.width(10.dp))
+    val chipItems = listOf("Chip 1", "Chip 2", "Chip 3", "Chip 4", "Chip 5", "Chip 6", "Chip 7")
+    var selectedChipIndex by remember { mutableStateOf(0) }
+
+    LazyRow(
+        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
+    ) {
+        items(chipItems.size) { index ->
+            val chipText = chipItems[index]
+            val isSelected = index == selectedChipIndex
+            Chip(
+                text = chipText,
+                isSelected = isSelected,
+                onClick = {
+                    selectedChipIndex = index
+                }
+            )
+            Spacer(modifier = Modifier.width(8.dp))
         }
     }
 }
+
+@Composable
+fun Chip(
+    text: String,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    Surface(
+        modifier = Modifier
+            .padding(4.dp)
+            .height(16.dp)
+            .clickable(onClick = onClick)
+            .background(if (isSelected) Color.Red else Color.Gray),
+        shape = RoundedCornerShape(4.dp)
+    ) {
+        Text(
+            text = text,
+            color = Color.White,
+            modifier = Modifier.padding(4.dp)
+        )
+    }
+}
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -103,11 +100,14 @@ fun HomeScreen(navController: NavController) {
     val images = viewModel.curatedImages().collectAsLazyPagingItems()
     Scaffold(
         topBar = {
-            TopApp(onSearchClick = {
-                navController.navigate(BottomNavigationItem.Search.route)
-            })
+            Searchbar(navController = navController)
         },
-        content = { HomeScreenListContent(items = images, navController = navController)}
+
+        content = {
+            ChipRow()
+            Spacer(modifier = Modifier.fillMaxWidth().height(16.dp))
+            HomeScreenListContent(items = images, navController = navController)
+        }
     )
     /*Column(
         verticalArrangement = Arrangement.Center,
@@ -136,8 +136,13 @@ fun HomeScreenListContent(
     items: LazyPagingItems<Image>,
     navController: NavController
 ) {
-    val photosViewModel = hiltViewModel<ImagesListViewModel>()
 
+
+    Spacer(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(50.dp)
+    )
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
         modifier = Modifier
@@ -169,7 +174,7 @@ fun HomeScreenListContent(
                         modifier = Modifier.padding(vertical = 20.dp)
                     ) {
                         Text(
-                            text = "Fetching Data",
+                            text = "Loading",
                             modifier = Modifier.padding(top = 8.dp)
                         )
 
@@ -221,11 +226,7 @@ fun HomeScreenListContent(
                         )
                     }
 
-                    Text(
-                        modifier = Modifier.padding(8.dp),
-                        text = error.localizedMessage ?: "Makosa imefanyika",
-                        textAlign = TextAlign.Center
-                    )
+
 
                     Button(
                         onClick = {

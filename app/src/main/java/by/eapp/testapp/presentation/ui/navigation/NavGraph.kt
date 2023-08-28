@@ -11,7 +11,7 @@ import by.eapp.testapp.presentation.ui.cardInformation.CardInformation
 import by.eapp.testapp.presentation.ui.cardInformation.PhotoDetailsScreen
 import by.eapp.testapp.presentation.ui.homescreen.home.HomeScreen
 import by.eapp.testapp.presentation.ui.homescreen.search.Searchbar
-
+/*
 @Composable
 fun SetupNavGraph(
     navController: NavHostController
@@ -43,4 +43,4 @@ fun SetupNavGraph(
             )
         }
     }
-}
+}*/

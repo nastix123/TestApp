@@ -7,8 +7,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.Surface
 import androidx.navigation.compose.rememberNavController
 import by.eapp.testapp.presentation.ui.SplashScreen
+import by.eapp.testapp.presentation.ui.navigation.BottomNavigationScreen
 //import by.eapp.testapp.presentation.ui.navigation.BottomNavigationScreen
-import by.eapp.testapp.presentation.ui.navigation.SetupNavGraph
 import by.eapp.testapp.ui.theme.TestAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
             TestAppTheme {
 
                 Surface {
-                    SetupNavGraph(navController = rememberNavController())
+                  BottomNavigationScreen()
                 }
 
             }

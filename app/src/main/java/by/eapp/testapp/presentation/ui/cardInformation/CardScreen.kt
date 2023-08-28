@@ -1,7 +1,4 @@
-@file:OptIn(ExperimentalGlideComposeApi::class)
-
 package by.eapp.testapp.presentation.ui.cardInformation
-
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -41,9 +38,11 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -56,6 +55,8 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+
+
 
 @Composable
 fun CardInformation(
@@ -141,6 +142,12 @@ fun CardInformation(
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun testBottomButton() {
+
+}
+
 @Composable
 fun bottomButton(
     image: ImageDetailResponse,
@@ -185,7 +192,7 @@ fun bottomButton(
 
                     {
                         Icon(
-                            imageVector = Icons.Default.Clear,
+                            painter = painterResource(id = R.drawable.download),
                             contentDescription = null,
                             tint = Color.Black,
                             modifier = Modifier.size(16.dp)
