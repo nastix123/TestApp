@@ -6,16 +6,16 @@ import androidx.room.Query
 import androidx.room.Upsert
 import by.eapp.testapp.model.imageList.Image
 import by.eapp.testapp.model.searching.Photo
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ImageDao {
   @Upsert
-  suspend fun saveAll(images:List<Image>)
+  fun saveAll(images:List<Image>)
 
   @Query("SELECT * FROM images_table")
   fun getAll(): PagingSource<Int, Image>
 
   @Query("DELETE FROM images_table")
-  suspend fun deleteAll()
-
+  fun deleteAll(): Int
 }

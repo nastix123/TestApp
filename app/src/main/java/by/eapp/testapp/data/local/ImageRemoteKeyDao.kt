@@ -10,11 +10,11 @@ import by.eapp.testapp.model.ImagesRemoteKey
 @Dao
 interface ImageRemoteKeyDao {
     @Query("SELECT * FROM photos_remote_keys_table WHERE id=:id")
-    suspend fun getRemoteKey(id: Int): ImagesRemoteKey?
+     fun getRemoteKey(id: Int): ImagesRemoteKey?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addAllRemoteKeys(remoteKeys: List<ImagesRemoteKey>?)
+     fun addAllRemoteKeys(remoteKeys: List<ImagesRemoteKey>?)
 
     @Query("DELETE FROM photos_remote_keys_table")
-    suspend fun deleteAllRemoteKeys()
+    fun deleteAllRemoteKeys()
 }

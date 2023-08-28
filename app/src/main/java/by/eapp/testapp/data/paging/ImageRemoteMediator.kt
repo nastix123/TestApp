@@ -25,9 +25,6 @@ class ImagesRemoteMediator @Inject constructor(
     private val imagesDao = dbImages.imageDao()
     private val remoteKeysDao = dbImages.remoteKeysDao()
 
-
-
-
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Image>): MediatorResult {
         return try {
             val currentPage = when (loadType) {
@@ -56,7 +53,7 @@ class ImagesRemoteMediator @Inject constructor(
             }
 
             delay(5000L)
-            val response = apiService.getImages(page = currentPage)
+           val response = apiService.getImages(page = currentPage)
             val endOfPaginationReached = response.photos.isEmpty()
             val prevPage = if (currentPage == 1) null else currentPage - 1
             val nextPage = if (endOfPaginationReached) null else currentPage + 1
@@ -67,7 +64,7 @@ class ImagesRemoteMediator @Inject constructor(
                     remoteKeysDao.deleteAllRemoteKeys()
                 }
 
-                val keys = response.photos.map { photo ->
+              val keys = response.photos.map { photo ->
                     ImagesRemoteKey(
                         id = photo.id,
                         prevPage = prevPage,
