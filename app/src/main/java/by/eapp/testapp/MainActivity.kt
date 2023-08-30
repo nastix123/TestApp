@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.Surface
 import androidx.navigation.compose.rememberNavController
 import by.eapp.testapp.presentation.ui.SplashScreen
+import by.eapp.testapp.presentation.ui.navigation.BottomNavigation
 import by.eapp.testapp.presentation.ui.navigation.BottomNavigationScreen
 //import by.eapp.testapp.presentation.ui.navigation.BottomNavigationScreen
 import by.eapp.testapp.ui.theme.TestAppTheme
@@ -21,11 +22,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
+        val navController = rememberNavController()
             TestAppTheme {
 
                 Surface {
-                  BottomNavigationScreen()
+                  BottomNavigation(navController = navController)
                 }
 
             }

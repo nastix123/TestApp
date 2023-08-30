@@ -8,7 +8,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -51,13 +54,26 @@ fun BottomNavigation(
         BottomNavigationItem.Bookmarks
     )
     val navController = rememberNavController()
-
+    var bottomBarState = remember {
+        (mutableStateOf(true))
+    }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+    when (navBackStackEntry?.destination?.route) {
+        "Home" -> {
+            bottomBarState.value = true
+        }
+        "Bookmarks" -> {
+            bottomBarState.value = true
+        }
+        "Details" -> {
+            bottomBarState.value = false
+        }
+    }
     Scaffold(
-
         bottomBar = {
-            androidx.compose.material.BottomNavigation(backgroundColor = colorResource(id = R.color.white)) {
-                val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val currentDestination = navBackStackEntry?.destination
+            androidx.compose.material.BottomNavigation(backgroundColor = Color(30, 30, 30, 1)) {
+
                 items.forEach { item ->
                     BottomNavigationItem(
                         icon = {
@@ -68,7 +84,6 @@ fun BottomNavigation(
                                 )
                             }
                         },
-
                         selected = currentDestination?.hierarchy?.any {
                             it.route == item.route
                         } == true,
@@ -85,12 +100,12 @@ fun BottomNavigation(
                 }
             }
         }
-    ) {
-        it
-        NavHost(navController, startDestination = BottomNavigationItem.Home.route) {
-            /* composable(BottomNavigationItem.Splash.route) {
-                 SplashScreen(navController = navController)
-             }*/
+    ) { padding ->
+        NavHost(
+            navController = navController,
+            startDestination = BottomNavigationItem.Home.route,
+            modifier = modifier.then(Modifier.padding(padding))
+        ) {
             composable(BottomNavigationItem.Search.route) {
                 Searchbar(navController = navController)
             }
@@ -108,8 +123,8 @@ fun BottomNavigation(
                         nullable = false
                     }
                 )) { entry ->
+                // Отображаем экран PhotoDetailsScreen без BottomNavigation
                 PhotoDetailsScreen(imageId = entry.arguments?.getInt("photoId")!!)
-
             }
         }
     }

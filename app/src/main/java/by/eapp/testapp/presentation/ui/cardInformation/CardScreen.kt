@@ -2,6 +2,8 @@ package by.eapp.testapp.presentation.ui.cardInformation
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import androidx.compose.foundation.Image
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,7 +22,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -36,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -55,6 +57,95 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+
+
+@Composable
+fun TestCard() {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .background(Color(30, 30, 30, 1))
+            .fillMaxSize()
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start,
+            modifier = Modifier
+                .background(Color(30, 30, 30, 1))
+                .fillMaxWidth(0.9f)
+        ) {
+            Button(
+                onClick = { },
+                Modifier
+                    .width(40.dp)
+                    .height(40.dp)
+                    .background(color = Color(0xFF393939), shape = RoundedCornerShape(size = 12.dp))
+                    ,
+                colors = ButtonDefaults.buttonColors(containerColor = Color(57, 57, 57, 1))
+
+            ) {
+
+            }
+
+            Spacer(modifier = Modifier.fillMaxWidth(0.3f))
+
+            Text(
+                text = "Name Surname",
+                style = TextStyle(
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight(700),
+                    color = Color(0xFF333333),
+                    textAlign = TextAlign.Center,
+                )
+            )
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.9f)
+                .height(560.dp)
+                .clip(RoundedCornerShape(15.dp))
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.fon),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clipToBounds()
+                    .align(Alignment.Center),
+                contentScale = ContentScale.Crop
+            )
+        }
+
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth(1f)
+                .height(26.dp)
+        )
+
+
+    }
+}
+
+@Preview
+@Composable
+fun previewCard() {
+    TestCard()
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -142,11 +233,7 @@ fun CardInformation(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun testBottomButton() {
 
-}
 
 @Composable
 fun bottomButton(

@@ -7,17 +7,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Warning
@@ -37,12 +40,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import by.eapp.testapp.data.remote.ImageAPIService
+import by.eapp.testapp.model.chips.CollectionResponse
 import by.eapp.testapp.model.imageList.Image
 import by.eapp.testapp.presentation.ui.homescreen.search.Searchbar
 
@@ -55,13 +64,15 @@ fun ChipRow() {
     LazyRow(
         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
     ) {
+
         items(chipItems.size) { index ->
             val chipText = chipItems[index]
             val isSelected = index == selectedChipIndex
             Chip(
-                text = chipText,
+                name = chipText,
+                modifier = Modifier.fillMaxWidth(),
                 isSelected = isSelected,
-                onClick = {
+                onSelectionChanged = {
                     selectedChipIndex = index
                 }
             )
@@ -70,25 +81,34 @@ fun ChipRow() {
     }
 }
 
+@Preview(showBackground = true)
 @Composable
 fun Chip(
-    text: String,
-    isSelected: Boolean,
-    onClick: () -> Unit
+    name: String = "Chip",
+    modifier: Modifier = Modifier,
+    isSelected: Boolean = false,
+    onSelectionChanged: (String) -> Unit = {},
 ) {
     Surface(
-        modifier = Modifier
-            .padding(4.dp)
-            .height(16.dp)
-            .clickable(onClick = onClick)
-            .background(if (isSelected) Color.Red else Color.Gray),
-        shape = RoundedCornerShape(4.dp)
+        modifier = Modifier.padding(4.dp).height(38.dp),
+        shape = MaterialTheme.shapes.medium,
+        color = if (isSelected) Color(0xFFBB1020) else Color(0xFF393939)
     ) {
-        Text(
-            text = text,
-            color = Color.White,
-            modifier = Modifier.padding(4.dp)
-        )
+        Row(modifier = Modifier
+            .toggleable(
+                value = isSelected,
+                onValueChange = {
+                    onSelectionChanged(name)
+                }
+            )
+        ) {
+            Text(
+                text = name,
+                style = MaterialTheme.typography.labelMedium,
+                color = Color.White,
+                modifier = Modifier.padding(8.dp)
+            )
+        }
     }
 }
 
@@ -98,37 +118,14 @@ fun Chip(
 fun HomeScreen(navController: NavController) {
     val viewModel = hiltViewModel<ImagesListViewModel>()
     val images = viewModel.curatedImages().collectAsLazyPagingItems()
-    Scaffold(
-        topBar = {
-            Searchbar(navController = navController)
-        },
-
-        content = {
-            ChipRow()
-            Spacer(modifier = Modifier.fillMaxWidth().height(16.dp))
-            HomeScreenListContent(items = images, navController = navController)
-        }
-    )
-    /*Column(
+    Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
-
     ) {
-        Searchbar(navController)
-        Spacer(
-            modifier = Modifier
-                .height(16.dp)
-                .fillMaxWidth()
-        )
+        Searchbar(navController = navController)
         ChipRow()
-        Spacer(
-            modifier = Modifier
-                .height(16.dp)
-                .fillMaxWidth()
-        )
-
-
-    }*/
+        HomeScreenListContent(items = images, navController = navController)
+    }
 }
 
 @Composable
@@ -137,12 +134,6 @@ fun HomeScreenListContent(
     navController: NavController
 ) {
 
-
-    Spacer(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(50.dp)
-    )
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
         modifier = Modifier
@@ -158,7 +149,6 @@ fun HomeScreenListContent(
         ) { photo ->
             photo?.let { CardItem(navController = navController, image = photo) }
         }
-
         val loadState = items.loadState.mediator
         item {
             if (loadState?.refresh is LoadState.Loading) {
@@ -185,7 +175,6 @@ fun HomeScreenListContent(
                     }
                 }
             }
-
             if (loadState?.append == LoadState.Loading) {
                 Box(
                     modifier = Modifier
@@ -207,7 +196,6 @@ fun HomeScreenListContent(
                 } else {
                     (loadState.refresh as LoadState.Error).error
                 }
-
                 val modifier = if (isPaginatingError) {
                     Modifier.padding(8.dp)
                 } else {
@@ -225,9 +213,6 @@ fun HomeScreenListContent(
                             contentDescription = null
                         )
                     }
-
-
-
                     Button(
                         onClick = {
                             items.refresh()

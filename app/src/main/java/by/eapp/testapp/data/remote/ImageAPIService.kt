@@ -1,6 +1,7 @@
 package by.eapp.testapp.data.remote
 
 import by.eapp.testapp.func.Base
+import by.eapp.testapp.model.chips.CollectionResponse
 import retrofit2.http.Query
 import by.eapp.testapp.model.imageDetail.ImageDetailResponse
 import by.eapp.testapp.model.imageList.ImageResponse
@@ -27,6 +28,12 @@ interface ImageAPIService {
         @Query("query") photoQuery: String,
         @Query("per_page") perPage: Int = 30
     ): Response
+
+    @Headers("Authorization: ${Base.API_KEY}")
+    @GET("collections")
+    suspend fun getCollections(
+        @Query("per_page") perPage: Int = 7
+    ) :List<CollectionResponse>
 }
 
 
