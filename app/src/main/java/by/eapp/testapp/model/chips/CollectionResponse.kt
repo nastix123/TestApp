@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class CollectionResponse(
     @SerializedName("collections")
-    val collections: List<InsideCollection>,
+    val collections: List<InsideFeaturedCollection>,
 
-)
+    )

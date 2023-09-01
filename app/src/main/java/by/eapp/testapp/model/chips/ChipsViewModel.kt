@@ -38,7 +38,7 @@ class ChipsViewModel @Inject constructor(
             }
         }
 
-        return emptyList() // Возвращаем пустой список в случае ошибки
+        return emptyList()
     }
 
 }

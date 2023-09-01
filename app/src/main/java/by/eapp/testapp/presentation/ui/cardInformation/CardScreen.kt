@@ -59,14 +59,15 @@ import coil.request.SuccessResult
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 
 
-@Composable
+/*@Composable
 fun TestCard() {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .background(Color(30, 30, 30, 1))
             .fillMaxSize()
+            .background(Color(30, 30, 30, 1))
+
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -134,21 +135,7 @@ fun TestCard() {
 fun previewCard() {
     TestCard()
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 @Composable
 fun CardInformation(
     image: ImageDetailResponse
@@ -160,22 +147,25 @@ fun CardInformation(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .background(Color.Black)
+            .background(Color(30, 30, 30, 1))
             .fillMaxSize()
     ) {
+        Spacer(modifier = Modifier.fillMaxWidth().height(16.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start,
             modifier = Modifier
-                .background(Color.Black)
+                .background(Color(30, 30, 30, 1))
                 .fillMaxWidth(0.9f)
         ) {
             Button(
                 onClick = { },
-                modifier = Modifier
-                    .width(50.dp)
-                    .height(50.dp)
-                    .padding(8.dp)
+                Modifier
+                    .width(40.dp)
+                    .height(40.dp)
+                    .background(color = Color(0xFF393939), shape = RoundedCornerShape(size = 12.dp))
+                ,
+                colors = ButtonDefaults.buttonColors(containerColor = Color(57, 57, 57, 1))
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,

@@ -69,8 +69,8 @@ fun Searchbar(
                     modifier = Modifier
                         .padding(1.4.dp)
                         .width(16.dp)
-                        .height(16.dp),
-                    tint = Color(57, 57, 57, 1)
+                        .height(16.dp)
+                    //tint = Color(57, 57, 57, 1)
                 )
             },
             placeholder = {
