@@ -21,6 +21,7 @@ sealed class BottomNavigationItem(
     object Home : BottomNavigationItem("home", Icons.Default.Home, "Home")
     object Details: BottomNavigationItem("details", null,"Details")
     object Bookmarks : BottomNavigationItem("bookmarks", Icons.Filled.Favorite, "Bookmarks")
+    object Chips:BottomNavigationItem("chips", null, "Chips")
 
     fun wihArgs(vararg args: Int): String {
         return buildString {

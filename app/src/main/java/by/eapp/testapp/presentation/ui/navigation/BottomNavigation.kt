@@ -23,6 +23,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import by.eapp.testapp.R
+import by.eapp.testapp.model.chips.CheepsScreen
 import by.eapp.testapp.presentation.ui.cardInformation.PhotoDetailsScreen
 import by.eapp.testapp.presentation.ui.homescreen.home.HomeScreen
 import by.eapp.testapp.presentation.ui.homescreen.search.Searchbar
@@ -114,6 +115,9 @@ fun BottomNavigation(
             }
             composable(BottomNavigationItem.Home.route) {
                 HomeScreen(navController)
+            }
+            composable(BottomNavigationItem.Chips.route) {
+                CheepsScreen(navController = navController)
             }
             composable(
                 BottomNavigationItem.Details.route + "/{photoId}",

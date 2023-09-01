@@ -51,66 +51,15 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import by.eapp.testapp.data.remote.ImageAPIService
+import by.eapp.testapp.model.chips.CheepsScreen
 import by.eapp.testapp.model.chips.CollectionResponse
 import by.eapp.testapp.model.imageList.Image
 import by.eapp.testapp.presentation.ui.homescreen.search.Searchbar
 
 
-@Composable
-fun ChipRow() {
-    val chipItems = listOf("Chip 1", "Chip 2", "Chip 3", "Chip 4", "Chip 5", "Chip 6", "Chip 7")
-    var selectedChipIndex by remember { mutableStateOf(0) }
 
-    LazyRow(
-        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
-    ) {
 
-        items(chipItems.size) { index ->
-            val chipText = chipItems[index]
-            val isSelected = index == selectedChipIndex
-            Chip(
-                name = chipText,
-                modifier = Modifier.fillMaxWidth(),
-                isSelected = isSelected,
-                onSelectionChanged = {
-                    selectedChipIndex = index
-                }
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-        }
-    }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun Chip(
-    name: String = "Chip",
-    modifier: Modifier = Modifier,
-    isSelected: Boolean = false,
-    onSelectionChanged: (String) -> Unit = {},
-) {
-    Surface(
-        modifier = Modifier.padding(4.dp).height(38.dp),
-        shape = MaterialTheme.shapes.medium,
-        color = if (isSelected) Color(0xFFBB1020) else Color(0xFF393939)
-    ) {
-        Row(modifier = Modifier
-            .toggleable(
-                value = isSelected,
-                onValueChange = {
-                    onSelectionChanged(name)
-                }
-            )
-        ) {
-            Text(
-                text = name,
-                style = MaterialTheme.typography.labelMedium,
-                color = Color.White,
-                modifier = Modifier.padding(8.dp)
-            )
-        }
-    }
-}
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -119,11 +68,12 @@ fun HomeScreen(navController: NavController) {
     val viewModel = hiltViewModel<ImagesListViewModel>()
     val images = viewModel.curatedImages().collectAsLazyPagingItems()
     Column(
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Searchbar(navController = navController)
-        ChipRow()
+        CheepsScreen(navController = navController)
         HomeScreenListContent(items = images, navController = navController)
     }
 }

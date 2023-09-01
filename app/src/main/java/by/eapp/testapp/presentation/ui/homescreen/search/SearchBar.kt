@@ -23,6 +23,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,7 +40,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import by.eapp.testapp.R
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun Searchbar(
     navController: NavController
@@ -52,7 +53,9 @@ fun Searchbar(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Spacer(modifier = Modifier.fillMaxWidth().height(16.dp))
+        Spacer(modifier = Modifier
+            .fillMaxWidth()
+            .height(16.dp))
         TextField(
             value = message,
             onValueChange = {
@@ -66,7 +69,8 @@ fun Searchbar(
                     modifier = Modifier
                         .padding(1.4.dp)
                         .width(16.dp)
-                        .height(16.dp)
+                        .height(16.dp),
+                    tint = Color(57, 57, 57, 1)
                 )
             },
             placeholder = {
@@ -76,10 +80,12 @@ fun Searchbar(
                 .padding(0.5.dp)
                 .fillMaxWidth(0.9f)
                 .height(50.dp)
-                .background(
-                    color = Color(0xFFF3F5F9),
-                )
-                .clip(shape = RoundedCornerShape(50.dp))
+                .clip(shape = RoundedCornerShape(50.dp)),
+            colors = TextFieldDefaults.colors(
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+
+            )
         )
     }
     val response = viewModel.imageList.value

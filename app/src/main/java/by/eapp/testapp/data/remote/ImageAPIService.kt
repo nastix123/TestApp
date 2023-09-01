@@ -33,7 +33,7 @@ interface ImageAPIService {
     @GET("collections")
     suspend fun getCollections(
         @Query("per_page") perPage: Int = 7
-    ) :List<CollectionResponse>
+    ) :CollectionResponse
 }
 
 

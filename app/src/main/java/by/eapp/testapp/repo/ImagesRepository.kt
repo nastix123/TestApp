@@ -13,7 +13,7 @@ import javax.inject.Inject
 class ImagesRepository @Inject constructor(
     private val apiService: ImageAPIService
 ) {
-    suspend fun getCollections(collection:  List<*>): Resource<List<CollectionResponse>> {
+    suspend fun getCollections(per_page: Int): Resource<CollectionResponse> {
         return try {
             val response = apiService.getCollections(7)
             return Resource.Success(response)
