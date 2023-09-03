@@ -1,5 +1,6 @@
 package by.eapp.testapp.model.chips
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -26,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import by.eapp.testapp.presentation.ui.navigation.BottomNavigationItem
 
 
 @Composable
@@ -51,26 +53,29 @@ fun CheepsScreen(navController: NavController) {
                 isSelected = isSelected,
                 onSelectionChanged = {
                     selectedChipIndex = chipItems.indexOf(chipText)
-                }
+                },
+                navController = navController
             )
             Spacer(modifier = Modifier.width(8.dp))
         }
     }
 }
 
-
-@Preview(showBackground = true)
 @Composable
 fun Chip(
     name: String = "Chip",
     modifier: Modifier = Modifier,
     isSelected: Boolean = false,
     onSelectionChanged: (String) -> Unit = {},
+    navController: NavController
 ) {
     Surface(
         modifier = Modifier
             .padding(4.dp)
-            .height(38.dp),
+            .height(38.dp)
+            .clickable{
+                      navController.navigate(BottomNavigationItem.Search.route)
+            },
         shape = MaterialTheme.shapes.medium,
         color = if (isSelected) Color(0xFFBB1020) else Color(0xFF393939)
     ) {

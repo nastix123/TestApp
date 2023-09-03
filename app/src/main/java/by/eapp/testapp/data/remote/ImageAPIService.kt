@@ -34,6 +34,7 @@ interface ImageAPIService {
     suspend fun getCollections(
         @Query("per_page") perPage: Int = 7
     ) :CollectionResponse
+
 }
 
 

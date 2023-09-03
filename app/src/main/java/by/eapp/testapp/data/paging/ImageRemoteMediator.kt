@@ -11,7 +11,9 @@ import androidx.room.withTransaction
 import by.eapp.testapp.model.ImagesRemoteKey
 import by.eapp.testapp.data.remote.ImageAPIService
 import by.eapp.testapp.data.local.Database
+import by.eapp.testapp.model.FavoriteImage
 import by.eapp.testapp.model.imageList.Image
+import by.eapp.testapp.repo.ImagesRepository
 import kotlinx.coroutines.delay
 import retrofit2.HttpException
 import java.io.IOException
@@ -24,6 +26,8 @@ class ImagesRemoteMediator @Inject constructor(
 ) : RemoteMediator<Int, Image>() {
     private val imagesDao = dbImages.imageDao()
     private val remoteKeysDao = dbImages.remoteKeysDao()
+
+
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Image>): MediatorResult {
         return try {
@@ -52,11 +56,17 @@ class ImagesRemoteMediator @Inject constructor(
                 }
             }
 
-            delay(5000L)
-           val response = apiService.getImages(page = currentPage)
+            delay(6000L)
+            val response = apiService.getImages(page = currentPage)
             val endOfPaginationReached = response.photos.isEmpty()
             val prevPage = if (currentPage == 1) null else currentPage - 1
             val nextPage = if (endOfPaginationReached) null else currentPage + 1
+
+           /* val imagesToAddToFavorites = response.photos.filter { it.isFavorite }
+            for (image in imagesToAddToFavorites) {
+                val favoriteImage = FavoriteImage(favorite_image_id = image.id, favorite_image_url = image.url)
+
+            }*/
 
             dbImages.withTransaction {
                 if (loadType == LoadType.REFRESH) {
@@ -89,7 +99,7 @@ class ImagesRemoteMediator @Inject constructor(
         }
     }
 
-    private suspend fun getRemoteKeyClosestToCurrentPosition(
+    private fun getRemoteKeyClosestToCurrentPosition(
         state: PagingState<Int, Image>
     ): ImagesRemoteKey? {
         return state.anchorPosition?.let { position ->
@@ -99,7 +109,7 @@ class ImagesRemoteMediator @Inject constructor(
         }
     }
 
-    private suspend fun getRemoteKeyForFirstItem(
+    private fun getRemoteKeyForFirstItem(
         state: PagingState<Int, Image>
     ): ImagesRemoteKey? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()

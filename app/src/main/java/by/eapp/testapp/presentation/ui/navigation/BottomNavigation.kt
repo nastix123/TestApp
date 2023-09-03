@@ -1,6 +1,7 @@
 package by.eapp.testapp.presentation.ui.navigation
 
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigationItem
@@ -72,6 +73,7 @@ fun BottomNavigation(
         }
     }
     Scaffold(
+
         bottomBar = {
             androidx.compose.material.BottomNavigation(backgroundColor = Color(30, 30, 30, 1)) {
 
@@ -127,7 +129,7 @@ fun BottomNavigation(
                         nullable = false
                     }
                 )) { entry ->
-                // Отображаем экран PhotoDetailsScreen без BottomNavigation
+
                 PhotoDetailsScreen(imageId = entry.arguments?.getInt("photoId")!!)
             }
         }

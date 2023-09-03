@@ -17,14 +17,6 @@ data class Image(
     @PrimaryKey(autoGenerate = false)
     @SerializedName("id")
     val id: Int,
-    @SerializedName("liked")
-    val liked: Boolean,
-    @SerializedName("photographer")
-    val photographer: String,
-    @SerializedName("photographer_id")
-    val photographerId: Int,
-    @SerializedName("photographer_url")
-    val photographerUrl: String,
     @SerializedName("src")
     @Embedded
     val src: Src,
@@ -32,4 +24,6 @@ data class Image(
     val url: String,
     @SerializedName("width")
     val width: Int
-)
+) {
+
+}

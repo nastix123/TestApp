@@ -51,7 +51,7 @@ fun CardItem(
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(image.src.large2x)
-                    .placeholder(R.drawable.img_1)
+                    .placeholder(R.drawable.placeholder_dark)
                     .crossfade(1000)
                     .build(),
                 contentScale = ContentScale.Crop,
@@ -103,7 +103,7 @@ fun <T : Any> LazyStaggeredGridScope.items(
 
 
 
-public data class PagingPlaceholderKey(private val index: Int) : Parcelable {
+data class PagingPlaceholderKey(private val index: Int) : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(index)
     }

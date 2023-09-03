@@ -12,5 +12,6 @@ import by.eapp.testapp.model.imageList.Image
     abstract class Database: RoomDatabase() {
     abstract fun remoteKeysDao(): ImageRemoteKeyDao
     abstract fun imageDao(): ImageDao
+    abstract fun favoriteImageDao(): FavoriteImageDao
 
 }
