@@ -31,8 +31,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,23 +50,22 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import by.eapp.testapp.R
 import by.eapp.testapp.func.Resource
 import by.eapp.testapp.func.download.ImageDownloader
-import by.eapp.testapp.model.FavoriteImage
 import by.eapp.testapp.model.imageDetail.ImageDetailResponse
-import by.eapp.testapp.repo.ImagesRepository
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-
 
 
 @Composable
 fun CardInformation(
     image: ImageDetailResponse,
-    imagesRepository: ImagesRepository
-) {
 
-    var isFavorite by rememberSaveable{
+    ) {
+    var isFavorite by rememberSaveable {
         mutableStateOf(false)
     }
+    val viewModel = hiltViewModel<CardScreenViewModel>()
+    val listOfFavoriteImage by viewModel.listOfFavoriteImages.collectAsState(emptyList())
+
     val context = LocalContext.current
     // val coroutineScope = rememberCoroutineScope()
 
@@ -77,9 +76,11 @@ fun CardInformation(
             .background(Color(30, 30, 30, 1))
             .fillMaxSize()
     ) {
-        Spacer(modifier = Modifier
-            .fillMaxWidth()
-            .height(30.dp))
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(30.dp)
+        )
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start,
@@ -127,7 +128,7 @@ fun CardInformation(
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(context)
-                    .data(image.src.portrait)
+                    .data(image.src.original)
                     .placeholder(R.drawable.placeholder_dark)
                     .crossfade(true)
                     .build(),
@@ -139,9 +140,7 @@ fun CardInformation(
                     .fillMaxHeight()
                     .clipToBounds()
                     .align(Alignment.Center)
-
             )
-
         }
 
         Spacer(
@@ -156,16 +155,13 @@ fun CardInformation(
             bottomButton(image, context)
             Spacer(modifier = Modifier.width(60.dp))
             Button(onClick = {
-                if (isImageFavorite) {
-
-                    val favoriteImage = FavoriteImage(favorite_image_id = image.id, favorite_image_url = image.url)
-                    imagesRepository.addFavoriteImage(favoriteImage)
+                if (isFavorite) {
+                    viewModel.deleteFavoriteImage(image)
                 } else {
-
-                    val favoriteImage = FavoriteImage(favorite_image_id = image.id, favorite_image_url = image.url)
-                    imagesRepository.deleteFavoriteImage(favoriteImage)
+                    viewModel.addFavoriteImage(image)
                 }
 
+                isFavorite = !isFavorite
             }) {
                 if (isFavorite) {
                     Icon(
@@ -199,7 +195,10 @@ fun bottomButton(
         horizontalArrangement = Arrangement.Center
     ) {
         Card(
-            colors = CardDefaults.cardColors(containerColor = Color(57, 57, 57, 1), contentColor = Color.Transparent),
+            colors = CardDefaults.cardColors(
+                containerColor = Color(57, 57, 57, 1),
+                contentColor = Color.Transparent
+            ),
             modifier = Modifier
                 .width(180.dp)
                 .height(48.dp)
@@ -243,7 +242,7 @@ fun downloadImage(context: Context, imageUrl: String) {
 fun PhotoDetailsScreen(
     imageId: Int,
 
-) {
+    ) {
     val viewModel = hiltViewModel<CardScreenViewModel>()
     viewModel.getImageDetails(imageId)
 

@@ -18,6 +18,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -90,7 +91,7 @@ fun HomeScreenListContent(
                             modifier = Modifier.padding(top = 8.dp)
                         )
 
-                        CircularProgressIndicator(
+                        LinearProgressIndicator(
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(top = 10.dp)
                         )
@@ -104,7 +105,7 @@ fun HomeScreenListContent(
                         .padding(16.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    CircularProgressIndicator(
+                    LinearProgressIndicator(
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.padding(vertical = 12.dp)
                     )

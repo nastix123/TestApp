@@ -14,6 +14,7 @@ import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
+
 class ImagesRepository @Inject constructor(
     private val apiService: ImageAPIService,
     private val favoriteImageDao: FavoriteImageDao
@@ -27,10 +28,18 @@ class ImagesRepository @Inject constructor(
     }
     fun getAllFavorites():Flow<List<FavoriteImage>>{
     return favoriteImageDao.getAllFavoriteImages()
+
     }
-    fun isImageInFavorites(imageId = Int, imageURL = String): Boolean {
-        return true
-    }
+    val listOfFavoriteImages: Flow<List<FavoriteImage>> = favoriteImageDao.getAllFavoriteImages()
+   /* fun isImageInFavorites(imageId = Int, imageURL = String): Boolean {
+        return flow {
+            val favoritesList = favoriteImageDao.getAllFavoriteImages()
+            val isImageFavorite = favoritesList.any {
+                it.favorite_image_id == imageId && it.favorite_image_url == imageURL
+            }
+            emit(isImageFavorite)
+        }
+    }*/
 
     suspend fun getCollections(): Resource<CollectionResponse> {
         return try {
