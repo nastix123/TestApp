@@ -10,17 +10,17 @@ class ImageDownloader(
 ) : DownloadImage {
     private val downloadManager = context.getSystemService(DownloadManager::class.java)
 
-    public override fun downloadImage(url: String): Long {
+    override fun downloadImage(url: String): Long {
         val request = DownloadManager.Request(url.toUri())
-            .setMimeType("image/jpeg")
+            .setMimeType("image/jpg")
             .setAllowedNetworkTypes(
                 DownloadManager.Request.NETWORK_WIFI.and(DownloadManager.Request.NETWORK_MOBILE)
             )
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            .setTitle("Image")
+            .setTitle("image_")
             .setDestinationInExternalPublicDir(
                 Environment.DIRECTORY_DOWNLOADS,
-                "image.jpeg"
+                "image.jpg"
             )
             .setAllowedOverMetered(true)
 

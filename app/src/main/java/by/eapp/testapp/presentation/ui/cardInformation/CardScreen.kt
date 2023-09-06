@@ -67,7 +67,6 @@ fun CardInformation(
     val listOfFavoriteImage by viewModel.listOfFavoriteImages.collectAsState(emptyList())
 
     val context = LocalContext.current
-    // val coroutineScope = rememberCoroutineScope()
 
     Column(
         verticalArrangement = Arrangement.Center,

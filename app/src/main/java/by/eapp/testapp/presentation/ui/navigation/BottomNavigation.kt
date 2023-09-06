@@ -25,11 +25,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import by.eapp.testapp.R
 import by.eapp.testapp.model.chips.CheepsScreen
+import by.eapp.testapp.presentation.ui.Bookmarks.BookmarkScreen
 import by.eapp.testapp.presentation.ui.cardInformation.PhotoDetailsScreen
 import by.eapp.testapp.presentation.ui.homescreen.home.HomeScreen
 import by.eapp.testapp.presentation.ui.homescreen.search.Searchbar
 
-
+/*
 @Composable
 fun BottomNavigationScreen() {
     val navController = rememberNavController()
@@ -44,7 +45,7 @@ fun BottomNavigationScreen() {
 
         })
 
-}
+}*/
 
 @Composable
 fun BottomNavigation(
@@ -113,7 +114,7 @@ fun BottomNavigation(
                 Searchbar(navController = navController)
             }
             composable(BottomNavigationItem.Bookmarks.route) {
-                HomeScreen(navController)
+                BookmarkScreen(navController = navController)
             }
             composable(BottomNavigationItem.Home.route) {
                 HomeScreen(navController)

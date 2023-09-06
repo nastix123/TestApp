@@ -25,12 +25,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
-    @Singleton
-    @Provides
-    fun providesLoggingInterceptor() = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
-    }
+object ApplicationModule {
 
     @Singleton
     @Provides
@@ -53,25 +48,23 @@ object AppModule {
 
    @Singleton
     @Provides
-    fun createsApiService(retrofit: Retrofit): ImageAPIService {
+    fun createApiService(retrofit: Retrofit): ImageAPIService {
         return retrofit.create(ImageAPIService::class.java)
     }
 
-
    @Singleton
     @Provides
-    fun providesDatabase(@ApplicationContext context: Context): Database {
+    fun provideDatabase(@ApplicationContext context: Context): Database {
         return Room.databaseBuilder(
-            context,
+            context = context,
             Database::class.java,
             "photos_db"
         ).build()
     }
-
     @OptIn(ExperimentalPagingApi::class)
     @Singleton
     @Provides
-    fun providesImagesPager(
+    fun provideImagesPager(
         database: Database,
         apiService: ImageAPIService
     ): Pager<Int, Image> {
@@ -80,5 +73,10 @@ object AppModule {
             remoteMediator = ImagesRemoteMediator( database, apiService),
             pagingSourceFactory = { database.imageDao().getAll() }
         )
+    }
+    @Singleton
+    @Provides
+    fun providesLoggingInterceptor() = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
     }
 }

@@ -28,7 +28,6 @@ class ImagesRemoteMediator @Inject constructor(
     private val remoteKeysDao = dbImages.remoteKeysDao()
 
 
-
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Image>): MediatorResult {
         return try {
             val currentPage = when (loadType) {

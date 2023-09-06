@@ -108,6 +108,7 @@ fun Searchbar(
         }
 
     }
+
     if (response.data.isNotEmpty()) {
         LazyVerticalStaggeredGrid(columns = StaggeredGridCells.Fixed(2)) {
             items(response.data) {image ->

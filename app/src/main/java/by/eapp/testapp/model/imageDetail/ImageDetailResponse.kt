@@ -1,6 +1,7 @@
 package by.eapp.testapp.model.imageDetail
 
 import by.eapp.testapp.model.FavoriteImage
+import by.eapp.testapp.model.searching.Src
 import com.google.gson.annotations.SerializedName
 
 data class ImageDetailResponse(
