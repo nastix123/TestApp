@@ -1,14 +1,14 @@
 @file:Suppress("UNREACHABLE_CODE")
 
-package by.eapp.testapp.repo
+package by.eapp.testapp.feature_images.data.repository
 
-import by.eapp.testapp.data.local.FavoriteImageDao
-import by.eapp.testapp.data.remote.ImageAPIService
+import by.eapp.testapp.feature_images.data.local.FavoriteImageDao
+import by.eapp.testapp.feature_images.data.remote.ImageAPIService
 import by.eapp.testapp.func.Resource
 import by.eapp.testapp.model.FavoriteImage
 import by.eapp.testapp.model.chips.CollectionResponse
-import by.eapp.testapp.model.imageDetail.ImageDetailResponse
-import by.eapp.testapp.model.searching.Response
+import by.eapp.testapp.feature_images.domain.model.ImageDetailResponse
+import by.eapp.testapp.feature_images.domain.model.image_Search.Response
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject

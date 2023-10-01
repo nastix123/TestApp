@@ -1,6 +1,6 @@
 package by.eapp.testapp.presentation.ui.homescreen.search
 
-import by.eapp.testapp.model.searching.Photo
+import by.eapp.testapp.feature_images.domain.model.image_Search.Photo
 
 
 data class SearchBarState(

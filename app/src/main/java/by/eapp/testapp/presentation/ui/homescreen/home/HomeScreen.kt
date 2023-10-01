@@ -16,7 +16,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -31,8 +30,8 @@ import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import by.eapp.testapp.model.chips.CheepsScreen
-import by.eapp.testapp.model.imageList.Image
+import by.eapp.testapp.presentation.ui.CheepScreen.CheepsScreen
+import by.eapp.testapp.feature_images.domain.model.image_List.Image
 import by.eapp.testapp.presentation.ui.homescreen.search.Searchbar
 
 

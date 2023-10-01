@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.paging.compose.LazyPagingItems
 import by.eapp.testapp.R
-import by.eapp.testapp.model.imageList.Image
+import by.eapp.testapp.feature_images.domain.model.image_List.Image
 import by.eapp.testapp.presentation.ui.navigation.BottomNavigationItem
 import coil.compose.AsyncImage
 import coil.request.ImageRequest

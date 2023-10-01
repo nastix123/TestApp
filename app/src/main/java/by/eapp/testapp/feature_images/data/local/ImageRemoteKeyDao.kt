@@ -1,4 +1,4 @@
-package by.eapp.testapp.data.local
+package by.eapp.testapp.feature_images.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

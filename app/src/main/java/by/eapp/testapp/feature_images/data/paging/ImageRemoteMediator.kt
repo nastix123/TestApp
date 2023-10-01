@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalPagingApi::class)
 
-package by.eapp.testapp.data.paging
+package by.eapp.testapp.feature_images.data.paging
 
 
 import androidx.paging.ExperimentalPagingApi
@@ -9,14 +9,9 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import by.eapp.testapp.model.ImagesRemoteKey
-import by.eapp.testapp.data.remote.ImageAPIService
-import by.eapp.testapp.data.local.Database
-import by.eapp.testapp.model.FavoriteImage
-import by.eapp.testapp.model.imageList.Image
-import by.eapp.testapp.repo.ImagesRepository
-import kotlinx.coroutines.delay
-import retrofit2.HttpException
-import java.io.IOException
+import by.eapp.testapp.feature_images.data.remote.ImageAPIService
+import by.eapp.testapp.feature_images.data.local.Database
+import by.eapp.testapp.feature_images.domain.model.image_List.Image
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
@@ -27,7 +22,6 @@ class ImagesRemoteMediator @Inject constructor(
     private val imagesDao = dbImages.imageDao()
     private val remoteKeysDao = dbImages.remoteKeysDao()
 
-
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Image>): MediatorResult {
         return try {
             val currentPage = when (loadType) {
@@ -35,37 +29,28 @@ class ImagesRemoteMediator @Inject constructor(
                     val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
                     remoteKeys?.nextPage?.minus(1) ?: 1
                 }
-
                 LoadType.PREPEND -> {
                     val remoteKeys = getRemoteKeyForFirstItem(state)
-                    val prevPage = remoteKeys?.prevPage
-                        ?: return MediatorResult.Success(
-                            endOfPaginationReached = remoteKeys != null
-                        )
-                    prevPage
+                    return if (remoteKeys != null) {
+                        MediatorResult.Success(endOfPaginationReached = false)
+                    } else {
+                        MediatorResult.Success(endOfPaginationReached = true)
+                    }
                 }
-
                 LoadType.APPEND -> {
                     val remoteKey = getRemoteKeyForLastItem(state)
-                    val nextPage = remoteKey?.nextPage
-                        ?: return MediatorResult.Success(
-                            endOfPaginationReached = remoteKey != null
-                        )
-                    nextPage
+                    return if (remoteKey != null) {
+                        MediatorResult.Success(endOfPaginationReached = false)
+                    } else {
+                        MediatorResult.Success(endOfPaginationReached = true)
+                    }
                 }
             }
 
-            delay(6000L)
             val response = apiService.getImages(page = currentPage)
             val endOfPaginationReached = response.photos.isEmpty()
             val prevPage = if (currentPage == 1) null else currentPage - 1
             val nextPage = if (endOfPaginationReached) null else currentPage + 1
-
-           /* val imagesToAddToFavorites = response.photos.filter { it.isFavorite }
-            for (image in imagesToAddToFavorites) {
-                val favoriteImage = FavoriteImage(favorite_image_id = image.id, favorite_image_url = image.url)
-
-            }*/
 
             dbImages.withTransaction {
                 if (loadType == LoadType.REFRESH) {
@@ -73,7 +58,7 @@ class ImagesRemoteMediator @Inject constructor(
                     remoteKeysDao.deleteAllRemoteKeys()
                 }
 
-              val keys = response.photos.map { photo ->
+                val keys = response.photos.map { photo ->
                     ImagesRemoteKey(
                         id = photo.id,
                         prevPage = prevPage,
@@ -86,15 +71,9 @@ class ImagesRemoteMediator @Inject constructor(
             }
 
             MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
-        } catch (e: IOException) {
-            e.printStackTrace()
-            return MediatorResult.Error(e)
-        } catch (e: HttpException) {
-            e.printStackTrace()
-            return MediatorResult.Error(e)
         } catch (e: Exception) {
             e.printStackTrace()
-            return MediatorResult.Error(e)
+            MediatorResult.Error(e)
         }
     }
 

@@ -1,8 +1,9 @@
-package by.eapp.testapp.model.searching
+package by.eapp.testapp.feature_images.domain.model.image_List
 
+import by.eapp.testapp.feature_images.domain.model.image_List.Image
 import com.google.gson.annotations.SerializedName
 
-data class Response (
+data class ImageResponse(
     @SerializedName("next_page")
     val nextPage: String,
     @SerializedName("page")
@@ -10,7 +11,7 @@ data class Response (
     @SerializedName("per_page")
     val perPage: Int,
     @SerializedName("photos")
-    val photos: List<Photo>,
+    val photos: List<Image>,
     @SerializedName("total_results")
     val totalResults: Int
 )

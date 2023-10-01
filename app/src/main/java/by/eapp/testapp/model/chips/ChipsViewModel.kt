@@ -1,17 +1,15 @@
 package by.eapp.testapp.model.chips
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import by.eapp.testapp.func.Resource
-import by.eapp.testapp.repo.ImagesRepository
+import by.eapp.testapp.feature_images.data.repository.ImagesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-//typealias Collections = Resource<List<CollectionResponse>>
+
 @HiltViewModel
 class ChipsViewModel @Inject constructor(
     private val repository: ImagesRepository
@@ -26,7 +24,7 @@ class ChipsViewModel @Inject constructor(
     val collectionTitles: StateFlow<List<String>> = _collectionTitles
 
     suspend fun getCollections(): List<String> {
-        val response = repository.getCollections(7)
+        val response = repository.getCollections()
 
         if (response is Resource.Success) {
             val data = response.data

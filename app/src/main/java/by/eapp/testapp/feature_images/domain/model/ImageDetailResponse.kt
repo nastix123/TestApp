@@ -1,7 +1,6 @@
-package by.eapp.testapp.model.imageDetail
+package by.eapp.testapp.feature_images.domain.model
 
-import by.eapp.testapp.model.FavoriteImage
-import by.eapp.testapp.model.searching.Src
+import by.eapp.testapp.feature_images.domain.model.image_Search.Src
 import com.google.gson.annotations.SerializedName
 
 data class ImageDetailResponse(

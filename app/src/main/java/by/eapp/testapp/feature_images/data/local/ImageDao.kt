@@ -1,12 +1,10 @@
-package by.eapp.testapp.data.local
+package by.eapp.testapp.feature_images.data.local
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
-import by.eapp.testapp.model.imageList.Image
-import by.eapp.testapp.model.searching.Photo
-import kotlinx.coroutines.flow.Flow
+import by.eapp.testapp.feature_images.domain.model.image_List.Image
 
 @Dao
 interface ImageDao {

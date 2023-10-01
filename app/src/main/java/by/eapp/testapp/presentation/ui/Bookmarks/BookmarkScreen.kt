@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
-import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -22,10 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import by.eapp.testapp.model.imageDetail.toImageDetailResponse
+import by.eapp.testapp.feature_images.domain.model.toImageDetailResponse
 import by.eapp.testapp.presentation.ui.cardInformation.CardInformation
 import by.eapp.testapp.presentation.ui.cardInformation.CardScreenViewModel
-import by.eapp.testapp.presentation.ui.homescreen.home.CardItem
 
 @Composable
 fun BookmarkScreen(navController: NavController) {

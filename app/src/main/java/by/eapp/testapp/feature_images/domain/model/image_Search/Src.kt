@@ -1,4 +1,4 @@
-package by.eapp.testapp.model.searching
+package by.eapp.testapp.feature_images.domain.model.image_Search
 
 import com.google.gson.annotations.SerializedName
 

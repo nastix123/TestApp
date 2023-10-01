@@ -1,8 +1,6 @@
 package by.eapp.testapp.presentation.ui.navigation
 
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.Icon
@@ -13,7 +11,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -23,8 +20,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import by.eapp.testapp.R
-import by.eapp.testapp.model.chips.CheepsScreen
+import by.eapp.testapp.presentation.ui.CheepScreen.CheepsScreen
 import by.eapp.testapp.presentation.ui.Bookmarks.BookmarkScreen
 import by.eapp.testapp.presentation.ui.cardInformation.PhotoDetailsScreen
 import by.eapp.testapp.presentation.ui.homescreen.home.HomeScreen

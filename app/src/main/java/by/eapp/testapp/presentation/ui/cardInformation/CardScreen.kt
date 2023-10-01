@@ -50,7 +50,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import by.eapp.testapp.R
 import by.eapp.testapp.func.Resource
 import by.eapp.testapp.func.download.ImageDownloader
-import by.eapp.testapp.model.imageDetail.ImageDetailResponse
+import by.eapp.testapp.feature_images.domain.model.ImageDetailResponse
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 

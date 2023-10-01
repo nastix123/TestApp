@@ -1,11 +1,11 @@
-package by.eapp.testapp.data.remote
+package by.eapp.testapp.feature_images.data.remote
 
 import by.eapp.testapp.func.Base
 import by.eapp.testapp.model.chips.CollectionResponse
 import retrofit2.http.Query
-import by.eapp.testapp.model.imageDetail.ImageDetailResponse
-import by.eapp.testapp.model.imageList.ImageResponse
-import by.eapp.testapp.model.searching.Response
+import by.eapp.testapp.feature_images.domain.model.ImageDetailResponse
+import by.eapp.testapp.feature_images.domain.model.image_List.ImageResponse
+import by.eapp.testapp.feature_images.domain.model.image_Search.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path

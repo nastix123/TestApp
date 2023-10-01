@@ -2,18 +2,15 @@ package by.eapp.testapp.presentation.ui.cardInformation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import by.eapp.testapp.model.imageDetail.ImageDetailResponse
+import by.eapp.testapp.feature_images.domain.model.ImageDetailResponse
 import by.eapp.testapp.func.Resource
 import by.eapp.testapp.model.FavoriteImage
-import by.eapp.testapp.model.imageDetail.toFavoriteImage
-import by.eapp.testapp.repo.ImagesRepository
+import by.eapp.testapp.feature_images.domain.model.toFavoriteImage
+import by.eapp.testapp.feature_images.data.repository.ImagesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
